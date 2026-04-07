@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Registration Form</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+}
+
+.form-container {
+    width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    border: 2px solid #333;
+    border-radius: 10px;
+    background-color: #fff;
+}
+
+h2 {
+    text-align: center;
+    border-bottom: 2px solid #333;
+    padding-bottom: 10px;
+}
+
+input, select {
+    width: 100%;
+    padding: 8px;
+    margin: 5px 0 15px 0;
+    border: 1px solid #555;
+    border-radius: 5px;
+}
+
+input[type="radio"] {
+    width: auto;
+}
+
+input[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+.gender-group {
+    margin-bottom: 15px;
+}
+</style>
+
+<script>
+function validateForm() {
+    let name = document.forms["Myform"]["fullname"].value.trim();
+    let mobile = document.forms["Myform"]["mobile"].value;
+    let address = document.forms["Myform"]["address"].value;
+    let aadhar = document.forms["Myform"]["aadhar"].value;
+    let pan = document.forms["Myform"]["pan"].value;
+    let pin = document.forms["Myform"]["PinCode"].value;
+    let email = document.forms["Myform"]["email"].value;
+
+    let gender = document.querySelector('input[name="gender"]:checked');
+
+    let namePattern = /^[A-Za-z ]+$/;
+    let mobilePattern = /^[0-9]{10}$/;
+    let aadharPattern = /^[0-9]{12}$/;
+    let panPattern = /^[A-Z]{5}[0-9]{4}[A-Z]$/;
+    let pinPattern = /^[0-9]{6}$/;
+    let emailPattern = /^[A-Za-z0-9._%+-]+@gmail\.com$/;
+
+    if (!gender) return alert("Select gender"), false;
+    if (!name.match(namePattern)) return alert("Invalid name"), false;
+    if (!pinPattern.test(pin)) return alert("Invalid PIN"), false;
+    if (!emailPattern.test(email)) return alert("Invalid email"), false;
+    if (!panPattern.test(pan)) return alert("Invalid PAN"), false;
+    if (!aadharPattern.test(aadhar)) return alert("Invalid Aadhar"), false;
+    if (!mobilePattern.test(mobile)) return alert("Invalid mobile"), false;
+    if (address === "") return alert("Address required"), false;
+
+    alert("Successfully Registered");
+    return true;
+}
+</script>
+</head>
+
+<body>
+
+<div class="form-container">
+<h2>Registration Form</h2>
+
+<form name="Myform" onsubmit="return validateForm()">
+
+<input type="text" name="fullname" placeholder="Full Name">
+<input type="email" name="email" placeholder="Email">
+<input type="tel" name="mobile" placeholder="Mobile">
+<input type="text" name="address" placeholder="Address">
+<input type="text" name="PinCode" placeholder="PIN Code">
+<input type="text" name="aadhar" placeholder="Aadhar">
+<input type="text" name="pan" placeholder="PAN">
+
+<input type="password" name="password" placeholder="Password">
+<input type="password" name="confirm-password" placeholder="Confirm Password">
+
+<div class="gender-group">
+Gender:
+<input type="radio" name="gender" value="male"> Male
+<input type="radio" name="gender" value="female"> Female
+<input type="radio" name="gender" value="other"> Other
+</div>
+
+<input type="date" name="dob">
+
+<select name="country">
+<option>India</option>
+<option>USA</option>
+<option>Germany</option>
+</select>
+
+<select name="education">
+<option>B.Tech</option>
+<option>B.Sc</option>
+<option>BCA</option>
+<option>M.Tech</option>
+</select>
+
+<input type="submit" value="Register">
+
+</form>
+</div>
+
+</body>
+</html>
